@@ -7,4 +7,5 @@ FROM ${DOCKER_REGISTRY}/${DOCKER_REPO}/${FROM_IMG_NAME}:${FROM_IMG_TAG}${DOCKER_
 
 RUN apt-get install -y libibverbs-dev xsltproc pkgconf
 USER user
-RUN eb FFTW-3.3.6-gompi-2017b.eb --robot
+RUN eb --dry-run-short FFTW-3.3.6-gompi-2017b.eb --robot \
+ && eb FFTW-3.3.6-gompi-2017b.eb --robot
