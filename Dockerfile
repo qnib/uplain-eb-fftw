@@ -5,7 +5,9 @@ ARG DOCKER_REGISTRY=docker.io
 ARG FROM_IMG_HASH=""
 FROM ${DOCKER_REGISTRY}/${DOCKER_REPO}/${FROM_IMG_NAME}:${FROM_IMG_TAG}${DOCKER_IMG_HASH}
 
-RUN apt-get install -y libibverbs-dev xsltproc pkgconf
+ARG EB_PKG=FFTW-3.3.6-gompi-2017b.eb
+USER root
+RUN apt-get install -y libibverbs-dev
 USER user
-RUN eb --dry-run-short FFTW-3.3.6-gompi-2017b.eb --robot \
- && eb FFTW-3.3.6-gompi-2017b.eb --robot
+RUN eb --dry-run-short ${EB_PKG} --robot \
+ && eb ${EB_PKG} --robot
